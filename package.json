@@ -1,0 +1,36 @@
+{
+  "name": "gh-scout",
+  "version": "0.0.1",
+  "description": "Gets info on a ghec organization",
+  "bin": "./cli.js",
+  "scripts": {
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint:check": "eslint --format unix .",
+    "lint:write": "eslint --format unix --fix .",
+    "dist": "npm pack"
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.{js,css,md}": "prettier --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tspascoal/gh-scout"
+  },
+  "author": "Tiago Pascoal",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "lint-staged": "^12.3.4",
+    "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "@octokit/core": "^3.5.1",
+    "@octokit/plugin-throttling": "^3.5.2",
+    "@octokit/rest": "^18.12.0",
+    "https-proxy-agent": "^2.2.1",
+    "chalk": "^4.1.2",
+    "commander": "^9.0.0"
+  }
+}
