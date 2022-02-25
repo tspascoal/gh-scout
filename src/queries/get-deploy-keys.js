@@ -3,8 +3,8 @@ const Logger = require('../utils/logger')
 
 module.exports = async (migration, org) => {
   const logger = new Logger(migration)
-  
-  let repos = [];
+
+  let repos = []
 
   logger.space()
   logger.title(`Getting deploy keys ${org}`)
@@ -36,7 +36,7 @@ module.exports = async (migration, org) => {
   let endCursor = null
   do {
     const variables = {
-      owner: org,      
+      owner: org,
       endCursor: endCursor
     }
 
@@ -44,7 +44,7 @@ module.exports = async (migration, org) => {
       token: migration.token
     })
 
-    let dataNode = data.organization.repositories;
+    let dataNode = data.organization.repositories
 
     logger.info(`found ${dataNode.totalCount} repos`)
     logger.debug(`Has More: ${dataNode.pageInfo.hasNextPage}`)

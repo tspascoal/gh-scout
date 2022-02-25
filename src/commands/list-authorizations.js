@@ -38,6 +38,10 @@ async function run(data) {
   logger.title('Authorizations:')
 
   for (const authorization of auths) {
-    logger.log(`  ${authorization.login} ${authorization.credential_type} authorization: ${authorization.credential_authorized_at} last access: ${authorization.credential_accessed_at} ${authorization.authorized_credential_note ?? "" }${authorization.authorized_credential_title ??""} ${authorization.scopes? "scopes: " + authorization.scopes.join(', ') : ""}`)
+    logger.log(
+      `  ${authorization.login} ${authorization.credential_type} authorization: ${authorization.credential_authorized_at} last access: ${authorization.credential_accessed_at} ${
+        authorization.authorized_credential_note ?? ''
+      }${authorization.authorized_credential_title ?? ''} ${authorization.scopes ? 'scopes: ' + authorization.scopes.join(', ') : ''}`
+    )
   }
 }
