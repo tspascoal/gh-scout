@@ -3,9 +3,11 @@ const commander = require('commander')
 const program = new commander.Command()
 
 const getStatusesCreatorsCommand = require('./src/commands/get-statuses-creators')
+const getDeployKeysCommand = require('./src/commands/get-deploy-keys')
 
 async function run() {
   program.addCommand(getStatusesCreatorsCommand())
+  program.addCommand(getDeployKeysCommand())
 
   try {
     await program.parseAsync(process.argv)
