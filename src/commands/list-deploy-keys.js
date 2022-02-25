@@ -5,10 +5,10 @@ const Logger = require('../utils/logger')
 const getDeployKeys = require('../queries/get-deploy-keys')
 
 module.exports = () => {
-  const command = new commander.Command('get-deploy-keys')
+  const command = new commander.Command('list-deploy-keys')
 
   command
-    .description('Gets repos with deploy keys')
+    .description('Lists repos with deploy keys')
     .requiredOption('-o, --org <string>', 'Organization')
     .requiredOption('--token <string>', 'the personal access token (with repo scope) of the GitHub.com organization', process.env.GITHUB_TOKEN)
     .option('-d, --debug', 'display debug output')

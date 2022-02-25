@@ -8,10 +8,10 @@ const getDefaultBranch = require('../queries/get-default-branch')
 const getAllRepos = require('../queries/get-all-repos')
 
 module.exports = () => {
-  const command = new commander.Command('get-statuses-creators')
+  const command = new commander.Command('list-statuses-creators')
 
   command
-    .description('Gets the creators and the contexts they are creating (statuses and checks)')
+    .description('List the creators and the contexts they are creating (statuses and checks)')
     .requiredOption('-o, --org <string>', 'Organization')
     .requiredOption('--token <string>', 'the personal access token (with repo scope) of the GitHub.com organization', process.env.GITHUB_TOKEN)
     .option('-r, --repos <string>', 'List of repos to get creates (comma separated). If ommited all repos will be scanned')

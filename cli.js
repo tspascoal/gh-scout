@@ -2,8 +2,8 @@
 const commander = require('commander')
 const program = new commander.Command()
 
-const getStatusesCreatorsCommand = require('./src/commands/get-statuses-creators')
-const getDeployKeysCommand = require('./src/commands/get-deploy-keys')
+const getStatusesCreatorsCommand = require('./src/commands/list-statuses-creators')
+const getDeployKeysCommand = require('./src/commands/list-deploy-keys')
 
 async function run() {
   program.addCommand(getStatusesCreatorsCommand())
