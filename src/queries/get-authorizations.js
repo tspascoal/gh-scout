@@ -18,10 +18,10 @@ module.exports = async (migration, org) => {
 
     const authorizations = await octokit.paginate('GET /orgs/:org/credential-authorizations', parameters)
 
-    logger.data('REST API (Get Authorizations): Response', authorizations)
+    logger.data('REST API (List Authorizations): Response', authorizations)
     return authorizations
   } catch (e) {
-    logger.error(`Error ${e.message}. List repos for ${org}`)
+    logger.error(`Error ${e.message}. List Authorizations for ${org}`)
     logger.data('REST API (Get Repo): Error', e)
     throw e
   }
