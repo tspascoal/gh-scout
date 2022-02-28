@@ -137,7 +137,7 @@ module.exports = async (migration, org, repo, branch, includeCreator = false) =>
 
       if (commit.status) {
         for (const status of commit.status.contexts) {
-          const creator = status.creater ? status.creator.url : "unknown"
+          const creator = status.creater ? status.creator.url : 'unknown'
 
           logger.info(`Read Status ${status.id} created by ${creator} => ${status.context} - ${status.state} ${status.targetUrl} ${status.description}`)
           statuses[commit.oid].push({
