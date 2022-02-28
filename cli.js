@@ -6,6 +6,8 @@ const getStatusesCreatorsCommand = require('./src/commands/list-statuses-creator
 const getDeployKeysCommand = require('./src/commands/list-deploy-keys')
 const getWebHooksCommand = require('./src/commands/list-repo-webhooks')
 const getAutolinksCommand = require('./src/commands/list-repo-autolinks')
+const getReleasesCommand = require('./src/commands/list-repo-releases')
+const getActionsData = require('./src/commands/list-actions-data')
 const getAuthorizationsCommand = require('./src/commands/list-authorizations')
 
 async function run() {
@@ -13,6 +15,8 @@ async function run() {
   program.addCommand(getDeployKeysCommand())
   program.addCommand(getWebHooksCommand())
   program.addCommand(getAutolinksCommand())
+  program.addCommand(getReleasesCommand())
+  program.addCommand(getActionsData())
   program.addCommand(getAuthorizationsCommand())
 
   try {
