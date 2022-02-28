@@ -108,25 +108,25 @@ module.exports = async (migration, org, repo, state, includeCreator = false) => 
         if (commit.commit.statusCheckRollup) {
           for (const status of commit.commit.statusCheckRollup.contexts.nodes) {
 
-            if(status.checkSuite) {
-            const creator = status.checkSuite.app
+            if (status.checkSuite) {
+              const creator = status.checkSuite.app
 
-            logger.info(`Read Check ${status.id} created by ${creator.name} => ${status.name} - ${status.status} ${status.url}`)
+              logger.info(`Read Check ${status.id} created by ${creator.name} => ${status.name} - ${status.status} ${status.url}`)
 
-            const contextPrefix = status.checkSuite.workflowRun ? `${status.checkSuite.workflowRun.workflow.name}/` : ''
+              const contextPrefix = status.checkSuite.workflowRun ? `${status.checkSuite.workflowRun.workflow.name}/` : ''
 
-            statuses[commit.commit.oid].push({
-              id: status.id,
-              state: status.status.toLowerCase(),
-              description: status.name,
-              context: `${contextPrefix}${status.name}`,
-              targetUrl: status.url,
-              creator: includeCreator ? creator : null,
-              type: 'check'
-            })
-          } else if(status.__typename) {
-            logger.info(`skipping ${status.__typename}`)
-          }
+              statuses[commit.commit.oid].push({
+                id: status.id,
+                state: status.status.toLowerCase(),
+                description: status.name,
+                context: `${contextPrefix}${status.name}`,
+                targetUrl: status.url,
+                creator: includeCreator ? creator : null,
+                type: 'check'
+              })
+            } else if (status.__typename) {
+              logger.info(`skipping ${status.__typename}`)
+            }
           }
         }
 

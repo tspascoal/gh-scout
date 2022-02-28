@@ -92,7 +92,7 @@ function aggregateCreators(statuses, creators) {
     const commitStatuses = statuses[oid]
 
     for (const status of commitStatuses) {
-      const createKey = status.creator.name ? status.creator.name : status.creator.url
+      const createKey = status.creator ? (status.creator.name ? status.creator.name : status.creator.url) : 'unknown'
 
       if (creators[createKey]) {
         if (!creators[createKey].contexts.includes(status.context)) {
