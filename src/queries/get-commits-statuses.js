@@ -28,6 +28,7 @@ module.exports = async (migration, org, repo, branch, includeCreator = false) =>
                     statusCheckRollup {
                       contexts(first: 100) {
                         nodes {
+                          __typename
                           ... on CheckRun {
                             id
                             status
@@ -112,21 +113,26 @@ module.exports = async (migration, org, repo, branch, includeCreator = false) =>
 
       if (commit.statusCheckRollup) {
         for (const status of commit.statusCheckRollup.contexts.nodes) {
-          const creator = status.checkSuite.app
+          if (status.checkSuite) {
 
-          logger.info(`Read Check ${status.id} created by ${creator.name} => ${status.name} - ${status.status} ${status.url}`)
+            const creator = status.checkSuite.app
 
-          const contextPrefix = status.checkSuite.workflowRun ? `${status.checkSuite.workflowRun.workflow.name}/` : ''
+            logger.info(`Read Check ${status.id} created by ${creator.name} => ${status.name} - ${status.status} ${status.url}`)
 
-          statuses[commit.oid].push({
-            id: status.id,
-            state: status.status.toLowerCase(),
-            description: status.name,
-            context: `${contextPrefix}${status.name}`,
-            targetUrl: status.url,
-            creator: includeCreator ? creator : null,
-            type: 'check'
-          })
+            const contextPrefix = status.checkSuite.workflowRun ? `${status.checkSuite.workflowRun.workflow.name}/` : ''
+
+            statuses[commit.oid].push({
+              id: status.id,
+              state: status.status.toLowerCase(),
+              description: status.name,
+              context: `${contextPrefix}${status.name}`,
+              targetUrl: status.url,
+              creator: includeCreator ? creator : null,
+              type: 'check'
+            })
+          } else if (status.__typename) {
+            logger.info(`skipped ${status.__typename}`)
+          }
         }
       }
 
