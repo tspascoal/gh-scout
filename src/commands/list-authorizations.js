@@ -39,7 +39,7 @@ async function run(data) {
 
   for (const authorization of auths) {
     logger.log(
-      `  ${authorization.login} ${authorization.credential_type} authorization: ${authorization.credential_authorized_at} last access: ${authorization.credential_accessed_at} ${
+      `  ${authorization.login} ${authorization.credential_type} authorization: ${authorization.credential_authorized_at} last access: ${authorization?.credential_accessed_at} expiration: ${authorization.authorized_credential_expires_at ?? "never"} ${
         authorization.authorized_credential_note ?? ''
       }${authorization.authorized_credential_title ?? ''} ${authorization.scopes ? 'scopes: ' + authorization.scopes.join(', ') : ''}`
     )
