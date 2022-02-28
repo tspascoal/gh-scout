@@ -39,7 +39,11 @@ async function run(data) {
   logger.log('login,type,authorization,last_access,expiration,note')
 
   for (const authorization of auths) {
-    logger.log(`${authorization.login},${authorization.credential_type},${authorization.credential_authorized_at},${authorization.credential_accessed_at ?? 'never'},${authorization.authorized_credential_expires_at ?? "never"},${authorization.authorized_credential_note ?? ''}${authorization.authorized_credential_title ?? ''},${authorization.scopes ? authorization.scopes.join('; ') : ''}`)
+    logger.log(
+      `${authorization.login},${authorization.credential_type},${authorization.credential_authorized_at},${authorization.credential_accessed_at ?? 'never'},${
+        authorization.authorized_credential_expires_at ?? 'never'
+      },${authorization.authorized_credential_note ?? ''}${authorization.authorized_credential_title ?? ''},${authorization.scopes ? authorization.scopes.join('; ') : ''}`
+    )
     // logger.log(
     //   `  ${authorization.login} ${authorization.credential_type} authorization: ${authorization.credential_authorized_at} last access: ${authorization?.credential_accessed_at} expiration: ${authorization.authorized_credential_expires_at ?? "never"} ${
     //     authorization.authorized_credential_note ?? ''

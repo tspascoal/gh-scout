@@ -107,7 +107,6 @@ module.exports = async (migration, org, repo, state, includeCreator = false) => 
 
         if (commit.commit.statusCheckRollup) {
           for (const status of commit.commit.statusCheckRollup.contexts.nodes) {
-
             if (status.checkSuite) {
               const creator = status.checkSuite.app
 

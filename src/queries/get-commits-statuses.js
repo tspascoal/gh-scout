@@ -114,7 +114,6 @@ module.exports = async (migration, org, repo, branch, includeCreator = false) =>
       if (commit.statusCheckRollup) {
         for (const status of commit.statusCheckRollup.contexts.nodes) {
           if (status.checkSuite) {
-
             const creator = status.checkSuite.app
 
             logger.info(`Read Check ${status.id} created by ${creator.name} => ${status.name} - ${status.status} ${status.url}`)
