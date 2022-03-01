@@ -3,6 +3,7 @@ const commander = require('commander')
 const Logger = require('../utils/logger')
 
 const getDeployKeys = require('../queries/get-deploy-keys')
+const getFile = require('../utils/get-file')
 
 module.exports = () => {
   const command = new commander.Command('list-deploy-keys')
@@ -11,6 +12,7 @@ module.exports = () => {
     .description('Lists repos with deploy keys')
     .requiredOption('-o, --org <string>', 'Organization')
     .requiredOption('--token <string>', 'the personal access token (with repo scope) of the GitHub.com organization', process.env.GITHUB_TOKEN)
+    .option('--output <string>', 'Output file', '-')
     .option('-d, --debug', 'display debug output')
     .option('--color', 'Force colors (use --color to force when autodetect disables colors (eg: piping')
     .action(run)
@@ -34,12 +36,21 @@ async function run(data) {
 
   logger.space()
   logger.title('Repos with keys')
-  for (const repo of repos) {
-    if (repo.deployKeys.length > 0) {
-      logger.log(`${repo.name} keys:`)
-      for (const key of repo.deployKeys) {
-        logger.log(`  ${key.title} created: ${key.createdAt} access: ${key.readOnly ? '(read only)' : '(write)'}`)
+
+  let output
+  try {
+    output = getFile(data.output)
+    output.write('repo,title,created,access_type\n')
+    for (const repo of repos) {
+      if (repo.deployKeys.length > 0) {
+        for (const key of repo.deployKeys) {
+          output.write(`${repo.name},${key.title},${key.createdAt},${key.readOnly ? 'read only' : 'write'}\n`)
+        }
       }
+    }
+  } finally {
+    if (output.close) {
+      output.close()
     }
   }
 }
