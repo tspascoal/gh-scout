@@ -21,7 +21,7 @@ module.exports = () => {
 async function run(data) {
   const logger = new Logger(data)
 
-  console.log(`Getting repos with deploy keys`)
+  console.log(`Getting repos with topics`)
 
   let repos = null
   try {
@@ -33,7 +33,7 @@ async function run(data) {
   }
 
   logger.space()
-  logger.title('Repos with topics')
+  logger.title(`Repos with topics (${repos.filter(r=> r.topics.length > 0).length})`)
   logger.log('repo,topics')
   for (const repo of repos) {
     if (repo.topics.length > 0) {
