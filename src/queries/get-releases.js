@@ -50,7 +50,7 @@ module.exports = async (data, org) => {
     for (const repo of dataNode.nodes) {
       logger.step(`Repo ${repo.name}`)
 
-      logger.info(`${repo.releases.totalCount} deploy keys`)
+      logger.info(`${repo.releases.totalCount} releases`)
 
       repos.push({
         name: repo.name,
