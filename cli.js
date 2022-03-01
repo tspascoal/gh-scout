@@ -9,6 +9,7 @@ const getAutolinksCommand = require('./src/commands/list-repo-autolinks')
 const getReleasesCommand = require('./src/commands/list-repo-releases')
 const getActionsData = require('./src/commands/list-actions-data')
 const getAuthorizationsCommand = require('./src/commands/list-authorizations')
+const getTopicsCommand = require('./src/commands/list-repo-topics')
 
 async function run() {
   program.addCommand(getStatusesCreatorsCommand())
@@ -18,6 +19,7 @@ async function run() {
   program.addCommand(getReleasesCommand())
   program.addCommand(getActionsData())
   program.addCommand(getAuthorizationsCommand())
+  program.addCommand(getTopicsCommand())
 
   try {
     await program.parseAsync(process.argv)
