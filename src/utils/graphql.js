@@ -14,12 +14,6 @@ module.exports = async (migration, query, variables, options) => {
   const baseUrl = process.env['GH_HOST'] ? process.env['GH_HOST'] + '/api/v3' : null
 
   const ghecAdminOctokit = new Octokit({
-    // log: { level: "debug" },
-    log: {
-      info: message => {
-        console.log(message)
-      }
-    },
     auth: ghecAdminToken,
     baseUrl,
     // Embed the proxy agent only if a proxy is used
