@@ -13,8 +13,11 @@ module.exports = token => {
 
   const throttlingOctokit = Octokit.plugin(throttling)
 
+  const baseUrl = process.env['GH_HOST'] ? process.env['GH_HOST'] + '/api/v3' : null
+
   return new throttlingOctokit({
     auth: token,
+    baseUrl,
     ...(proxy.enabled ? { request: { agent: proxy.proxyAgent } } : {}),
     throttle: {
       onRateLimit: (retryAfter, options, octokit) => {
